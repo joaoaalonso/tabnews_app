@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:tabnews_app/extensions/dark_mode.dart';
 import 'package:tabnews_app/favorites/favorites_view.dart';
 import 'package:tabnews_app/home/home_view.dart';
+import 'package:tabnews_app/profile_menu/profile_menu_view.dart';
 import 'package:tabnews_app/search/search_view.dart';
 import 'package:tabnews_app/shared/utils/orientation.dart';
 
@@ -164,7 +165,7 @@ class _AppScreenState extends State<AppScreen> {
     TabItem(
       title: 'Perfil',
       icon: Icons.person,
-      widget: const SizedBox(),
+      widget: const ProfileMenuView(),
     ),
   ];
 

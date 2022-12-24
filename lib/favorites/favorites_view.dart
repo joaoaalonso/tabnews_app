@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tabnews_app/extensions/dark_mode.dart';
 import 'package:tabnews_app/favorites/favorites_bloc.dart';
 import 'package:tabnews_app/favorites/favorites_events.dart';
 import 'package:tabnews_app/favorites/favorites_state.dart';
 import 'package:tabnews_app/favorites/widgets/favorites_empty.dart';
 import 'package:tabnews_app/favorites/widgets/favorites_failure.dart';
+import 'package:tabnews_app/shared/widgets/default_app_bar.dart';
 import 'package:tabnews_app/shared/widgets/posts_list_item.dart';
 import 'package:tabnews_app/shared/widgets/skeleton/skeleton_list.dart';
 
@@ -44,22 +43,7 @@ class _FavoritesViewState extends State<FavoritesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            SvgPicture.asset(
-              context.isDarkMode
-                  ? 'lib/assets/logo.svg'
-                  : 'lib/assets/logo-dark.svg',
-              semanticsLabel: 'TabNews',
-            ),
-            const SizedBox(width: 10.0),
-            const Text('Favoritos'),
-          ],
-        ),
-        foregroundColor: context.isDarkMode ? Colors.white : Colors.black,
-        centerTitle: false,
-      ),
+      appBar: const DefaultAppBar(title: 'Favoritos'),
       body: StreamBuilder<FavoritesState>(
           stream: bloc.output,
           builder: (context, snapshot) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:tabnews_app/extensions/dark_mode.dart';
 import 'package:tabnews_app/home/home_view_model.dart';
@@ -7,6 +6,7 @@ import 'package:tabnews_app/posts_list/posts_list_view.dart';
 import 'package:tabnews_app/shared/models/tag.dart';
 import 'package:tabnews_app/shared/repositories/post_repository.dart';
 import 'package:tabnews_app/shared/repositories/tag_repository.dart';
+import 'package:tabnews_app/shared/widgets/default_app_bar.dart';
 
 class HomeView extends StatefulWidget {
   final ScrollController? scrollController;
@@ -59,21 +59,8 @@ class _HomeViewState extends State<HomeView> {
     return DefaultTabController(
       length: tags.length + 2,
       child: Scaffold(
-        appBar: AppBar(
-          title: Row(
-            children: [
-              SvgPicture.asset(
-                context.isDarkMode
-                    ? 'lib/assets/logo.svg'
-                    : 'lib/assets/logo-dark.svg',
-                semanticsLabel: 'TabNews',
-              ),
-              const SizedBox(width: 10.0),
-              const Text('TabNews'),
-            ],
-          ),
-          foregroundColor: context.isDarkMode ? Colors.white : Colors.black,
-          centerTitle: false,
+        appBar: DefaultAppBar(
+          title: 'TabNews',
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(20.0),
             child: Align(
