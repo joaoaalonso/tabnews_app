@@ -34,7 +34,7 @@ void openUrl(BuildContext context, String? url) async {
     }
   } else {
     if (await canLaunchUrl(uri)) {
-      launchUrl(uri, mode: LaunchMode.externalApplication);
+      launchUrl(uri, mode: LaunchMode.inAppWebView);
     }
   }
 }
