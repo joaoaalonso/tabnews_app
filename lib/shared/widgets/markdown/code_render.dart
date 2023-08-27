@@ -26,12 +26,7 @@ class CodeRender extends StatelessWidget {
         child: HighlightView(
           content.replaceAll('\\n', '\n'),
           language: result.language ?? 'dart',
-          padding: const EdgeInsets.only(
-            top: 18,
-            left: 18,
-            right: 18,
-            bottom: 0,
-          ),
+          padding: const EdgeInsets.all(16),
           theme: atomOneDarkTheme,
         ),
       ),
