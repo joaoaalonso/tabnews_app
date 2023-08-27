@@ -1,18 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:markdown/markdown.dart' as markdown;
 import 'package:markdown_widget/config/highlight_themes.dart' as theme;
 import 'package:tabnews_app/extensions/dark_mode.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:tabnews_app/shared/utils/open_link.dart';
 import 'package:tabnews_app/shared/widgets/image_viewer.dart';
+import 'package:tabnews_app/shared/widgets/markdown/img_render.dart';
+
+import 'h2_render.dart';
 
 class Markdown extends StatelessWidget {
   final String body;
-  final useNewVersion = true;
 
   const Markdown({
     super.key,
     required this.body,
   });
+
+  final useHtml = true;
+
+  @override
+  Widget build(BuildContext context) {
+    if (useHtml) {
+      return _HtmlRender(body: body);
+    } else {
+      return _MarkdownRender(body: body);
+    }
+  }
+}
+
+class _HtmlRender extends StatelessWidget {
+  final String body;
+
+  const _HtmlRender({required this.body});
+
+  @override
+  Widget build(BuildContext context) {
+    final html = markdown.markdownToHtml(body);
+
+    return Html(
+      data: html,
+      onLinkTap: (url, renderContext, attributes, element) {
+        openUrl(context, url);
+      },
+      style: {
+        'a': Style(
+          textDecoration: TextDecoration.none,
+        ),
+        'body': Style(
+          margin: Margins.zero,
+        ),
+      },
+      customRenders: {
+        tagMatcher('img'): CustomRender.widget(
+          widget: (renderContext, buildChild) =>
+              ImgRender(renderContext, buildChild),
+        ),
+        tagMatcher('h2'): CustomRender.widget(
+          widget: (renderContext, buildChild) =>
+              H2Render(renderContext, buildChild),
+        ),
+      },
+    );
+  }
+}
+
+class _MarkdownRender extends StatelessWidget {
+  final String body;
+
+  const _MarkdownRender({required this.body});
 
   @override
   Widget build(BuildContext context) {

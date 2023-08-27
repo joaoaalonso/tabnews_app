@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tabnews_app/extensions/dark_mode.dart';
 import 'package:tabnews_app/favorites/favorites_button.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:tabnews_app/extensions/dark_mode.dart';
 
-class DefaultAppBar extends StatelessWidget with PreferredSizeWidget {
+class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showLogo;
   final PreferredSizeWidget? bottom;

@@ -55,6 +55,7 @@ class _PostsListViewState extends State<PostsListView>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return StreamBuilder<PostsListState>(
       stream: bloc.output,
       builder: (context, snapshot) {
@@ -67,8 +68,8 @@ class _PostsListViewState extends State<PostsListView>
                   snapshot.data!.hasMore ? posts.length + 1 : posts.length,
               itemBuilder: (context, index) {
                 if (index == posts.length && snapshot.data!.hasMore) {
-                  return Column(
-                    children: const [
+                  return const Column(
+                    children: [
                       SkeletonListItem(),
                       SkeletonListItem(),
                     ],

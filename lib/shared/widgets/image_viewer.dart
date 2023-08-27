@@ -1,4 +1,3 @@
-import 'package:dismissible_page/dismissible_page.dart';
 import 'package:flutter/material.dart';
 import 'package:tabnews_app/shared/utils/orientation.dart';
 
@@ -78,66 +77,59 @@ class _FullscreenImageState extends State<_FullscreenImage>
 
   @override
   Widget build(BuildContext context) {
-    return DismissiblePage(
-      onDismissed: () {
-        Navigator.of(context).pop();
-      },
-      direction: DismissiblePageDismissDirection.down,
-      isFullScreen: true,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Stack(
-            children: [
-              Center(
-                child: GestureDetector(
-                  onDoubleTapDown: (details) => tapDownDetails = details,
-                  onDoubleTap: () {
-                    const scale = 3.0;
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Center(
+              child: GestureDetector(
+                onDoubleTapDown: (details) => tapDownDetails = details,
+                onDoubleTap: () {
+                  const scale = 3.0;
 
-                    final position = tapDownDetails!.localPosition;
-                    final x = -position.dx * (scale - 1);
-                    final y = -position.dy * (scale - 1);
-                    final zoomed = Matrix4.identity()
-                      ..translate(x, y)
-                      ..scale(scale);
+                  final position = tapDownDetails!.localPosition;
+                  final x = -position.dx * (scale - 1);
+                  final y = -position.dy * (scale - 1);
+                  final zoomed = Matrix4.identity()
+                    ..translate(x, y)
+                    ..scale(scale);
 
-                    final end = transformationController.value.isIdentity()
-                        ? zoomed
-                        : Matrix4.identity();
+                  final end = transformationController.value.isIdentity()
+                      ? zoomed
+                      : Matrix4.identity();
 
-                    animation = Matrix4Tween(
-                      begin: transformationController.value,
-                      end: end,
-                    ).animate(
-                      CurveTween(curve: Curves.easeOut)
-                          .animate(animationController),
-                    );
+                  animation = Matrix4Tween(
+                    begin: transformationController.value,
+                    end: end,
+                  ).animate(
+                    CurveTween(curve: Curves.easeOut)
+                        .animate(animationController),
+                  );
 
-                    animationController.forward(from: 0);
-                  },
-                  child: InteractiveViewer(
-                    clipBehavior: Clip.none,
-                    panEnabled: true,
-                    scaleEnabled: true,
-                    transformationController: transformationController,
-                    child: Hero(
-                      tag: "image-${widget.uri.toString()}",
-                      child: Image.network(
-                        widget.uri.toString(),
-                        fit: BoxFit.fill,
-                      ),
+                  animationController.forward(from: 0);
+                },
+                child: InteractiveViewer(
+                  clipBehavior: Clip.none,
+                  panEnabled: true,
+                  scaleEnabled: true,
+                  transformationController: transformationController,
+                  child: Hero(
+                    tag: "image-${widget.uri.toString()}",
+                    child: Image.network(
+                      widget.uri.toString(),
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
               ),
-              IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: const Icon(Icons.close),
-                color: Colors.white,
-              ),
-            ],
-          ),
+            ),
+            IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: const Icon(Icons.close),
+              color: Colors.white,
+            ),
+          ],
         ),
       ),
     );

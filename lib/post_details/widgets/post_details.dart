@@ -1,10 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:tabnews_app/extensions/dark_mode.dart';
 import 'package:tabnews_app/post_details/widgets/tabcoins_counter.dart';
-import 'package:tabnews_app/posts_list/posts_list_view.dart';
 import 'package:tabnews_app/shared/models/post.dart';
 import 'package:tabnews_app/shared/utils/open_link.dart';
-import 'package:tabnews_app/shared/widgets/markdown.dart';
+import 'package:tabnews_app/shared/widgets/markdown/markdown.dart';
 import 'package:tabnews_app/shared/widgets/tag.dart';
 import 'package:tabnews_app/user_posts/user_posts_view.dart';
 
@@ -72,29 +72,34 @@ class PostContent extends StatelessWidget {
               ? Column(
                   children: [
                     const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        const Icon(Icons.link),
-                        const SizedBox(
-                          width: 4,
-                        ),
-                        const Text(
-                          "Fonte: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          const WidgetSpan(
+                            child: Icon(Icons.link, size: 17),
                           ),
-                        ),
-                        InkWell(
-                          onTap: () => openUrl(context, post.sourceUrl!),
-                          child: Text(
-                            post.sourceUrl!,
+                          const WidgetSpan(
+                            child: SizedBox(
+                              width: 4,
+                            ),
+                          ),
+                          const TextSpan(
+                            text: "Fonte: ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: post.sourceUrl!,
                             style: const TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
                             ),
-                          ),
-                        )
-                      ],
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => openUrl(context, post.sourceUrl!),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 )

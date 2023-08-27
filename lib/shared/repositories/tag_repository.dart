@@ -25,10 +25,11 @@ class TagRepository {
   }
 
   Future<List<Tag>> getAvailableTags() async {
-    final url = '$baseUrl/available.json';
-    final response = await http.get(Uri.parse(url));
-    final List<dynamic> parsedResponse =
-        jsonDecode(utf8.decode(response.bodyBytes));
-    return parsedResponse.map((e) => Tag.fromJson(e)).toList();
+    return [];
+    // final url = '$baseUrl/available.json';
+    // final response = await http.get(Uri.parse(url));
+    // final List<dynamic> parsedResponse =
+    //     jsonDecode(utf8.decode(response.bodyBytes));
+    // return parsedResponse.map((e) => Tag.fromJson(e)).toList();
   }
 }
