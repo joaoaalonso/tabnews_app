@@ -26,31 +26,33 @@ class PreRender extends StatelessWidget {
     final language = rawContent[0].attributes['class']?.split('-')[1];
     final text = _sanitize(rawContent[0].children[0].toString());
 
-    return Stack(children: [
-      SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: HighlightView(
-            text,
-            language: language,
-            padding: const EdgeInsets.all(16),
-            theme: atomOneDarkTheme,
+    return Stack(
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: HighlightView(
+              text,
+              language: language ?? 'js',
+              padding: const EdgeInsets.all(16),
+              theme: atomOneDarkTheme,
+            ),
           ),
         ),
-      ),
-      Align(
-        alignment: AlignmentDirectional.topEnd,
-        child: IconButton(
-          onPressed: () => copyToClipboard(context, text),
-          icon: const Icon(
-            Icons.copy,
-            color: Colors.white,
-            size: 14,
+        Align(
+          alignment: AlignmentDirectional.topEnd,
+          child: IconButton(
+            onPressed: () => copyToClipboard(context, text),
+            icon: const Icon(
+              Icons.copy,
+              color: Colors.white,
+              size: 14,
+            ),
           ),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 
   String _sanitize(String rawContent) {
