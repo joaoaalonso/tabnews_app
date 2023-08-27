@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tabnews_app/post_details/post_details_view.dart';
-import 'package:tabnews_app/posts_list/posts_list_view.dart';
 import 'package:tabnews_app/user_posts/user_posts_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 

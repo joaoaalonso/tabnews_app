@@ -119,7 +119,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_highlight:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_highlight
       sha256: "7b96333867aa07e122e245c033b8ad622e4e3a42a1a2372cbb098a2541d8782c"
@@ -161,7 +161,7 @@ packages:
     source: sdk
     version: "0.0.0"
   highlight:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: highlight
       sha256: "5353a83ffe3e3eca7df0abfb72dcf3fa66cc56b953728e7113ad4ad88497cf21"
@@ -224,14 +224,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.1"
-  markdown_widget:
-    dependency: "direct main"
-    description:
-      name: markdown_widget
-      sha256: "54b636168cdf1b391544f00a481ff43dcee0ca31a1528aebc58ab6cc8b654def"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.0+2"
   matcher:
     dependency: transitive
     description:
@@ -581,46 +573,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  video_player:
-    dependency: transitive
-    description:
-      name: video_player
-      sha256: "7bfb0f889879beb2980550a4df07721e980b59a874fc2c1019a6f85eab44bb95"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.8"
-  video_player_android:
-    dependency: transitive
-    description:
-      name: video_player_android
-      sha256: d4d7313d1dc6f14d3414b98e2b268c3f34f4ac4ce4af51cf905e9a438edf0c77
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.9"
-  video_player_avfoundation:
-    dependency: transitive
-    description:
-      name: video_player_avfoundation
-      sha256: "3df559495634bba8feb24439ac0a28a380d4ff96be7990811dc4ec81299e8cfa"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.7"
-  video_player_platform_interface:
-    dependency: transitive
-    description:
-      name: video_player_platform_interface
-      sha256: "318a6d20577e1c78cf0bf40670883cc571ea860c72a4f7426d7dacce4bdd4343"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.1.4"
-  video_player_web:
-    dependency: transitive
-    description:
-      name: video_player_web
-      sha256: ed949a3df5fe88533254bbdd242c3d8eea19ecbc4e7af90da84ef087533f584b
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.12"
   web:
     dependency: transitive
     description:

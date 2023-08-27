@@ -80,8 +80,8 @@ class _SearchViewState extends State<SearchView> {
                     snapshot.data!.hasMore ? posts.length + 1 : posts.length,
                 itemBuilder: (context, index) {
                   if (index == posts.length && snapshot.data!.hasMore) {
-                    return Column(
-                      children: const [
+                    return const Column(
+                      children: [
                         SkeletonListItem(),
                         SkeletonListItem(),
                       ],

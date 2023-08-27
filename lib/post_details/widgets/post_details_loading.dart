@@ -12,8 +12,8 @@ class PostDetailsLoading extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            Row(
-              children: const [
+            const Row(
+              children: [
                 SkeletonLine(
                   style: SkeletonLineStyle(height: 14, width: 100),
                 ),

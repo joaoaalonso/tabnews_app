@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:tabnews_app/posts_list/posts_list_events.dart';
 import 'package:tabnews_app/search/search_events.dart';
 import 'package:tabnews_app/search/search_state.dart';
 import 'package:tabnews_app/shared/models/post.dart';

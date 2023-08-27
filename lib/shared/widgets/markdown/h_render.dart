@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/html_parser.dart';
 
-class H2Render extends StatelessWidget {
+class HRender extends StatelessWidget {
+  final double fontSize;
   final RenderContext renderContext;
   final List<InlineSpan> Function() buildChild;
 
-  const H2Render(this.renderContext, this.buildChild, {super.key});
+  const HRender(this.fontSize, this.renderContext, this.buildChild,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +19,17 @@ class H2Render extends StatelessWidget {
           bottom: BorderSide(color: Color(0xDDDDDDDD)),
         ),
       ),
-      child: _Content(renderContext, buildChild),
+      child: _Content(fontSize, renderContext, buildChild),
     );
   }
 }
 
 class _Content extends StatelessWidget {
+  final double fontSize;
   final RenderContext renderContext;
   final List<InlineSpan> Function() buildChild;
 
-  const _Content(this.renderContext, this.buildChild);
+  const _Content(this.fontSize, this.renderContext, this.buildChild);
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +47,8 @@ class _Content extends StatelessWidget {
       final content = rawString.substring(1, rawString.length - 1);
       return Text(
         content,
-        style: const TextStyle(
-          fontSize: 18.0,
+        style: TextStyle(
+          fontSize: fontSize,
           fontWeight: FontWeight.bold,
         ),
       );
