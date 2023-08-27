@@ -15,8 +15,8 @@ class CodeRender extends StatelessWidget {
   Widget build(BuildContext context) {
     final rawContent = renderContext.tree.children;
     final rawString = rawContent[0].toString();
-    final content = rawString.substring(1, rawString.length - 1);
-
+    final content = _sanitize(rawString.substring(1, rawString.length - 1));
+    print(content);
     final result = highlight.parse(content, autoDetection: true);
 
     return SizedBox(
@@ -31,5 +31,13 @@ class CodeRender extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _sanitize(String rawContent) {
+    var content = rawContent.replaceAll('\\n', '\n');
+    if (content.endsWith('\n')) {
+      content = content.substring(0, content.length - 1);
+    }
+    return content;
   }
 }
