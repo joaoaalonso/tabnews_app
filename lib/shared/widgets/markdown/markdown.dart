@@ -3,6 +3,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:markdown/markdown.dart' as markdown;
 import 'package:tabnews_app/shared/utils/open_link.dart';
 import 'package:tabnews_app/shared/widgets/markdown/code_render.dart';
+import 'package:tabnews_app/shared/widgets/markdown/pre_render.dart';
 import 'package:tabnews_app/shared/widgets/markdown/img_render.dart';
 
 import 'h_render.dart';
@@ -51,6 +52,10 @@ class Markdown extends StatelessWidget {
         tagMatcher('code'): CustomRender.widget(
           widget: (renderContext, buildChild) =>
               CodeRender(renderContext, buildChild),
+        ),
+        tagMatcher('pre'): CustomRender.widget(
+          widget: (renderContext, buildChild) =>
+              PreRender(renderContext, buildChild),
         ),
       },
     );

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_highlight/flutter_highlight.dart';
-import 'package:flutter_highlight/themes/atom-one-dark.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/html_parser.dart';
-import 'package:highlight/highlight.dart';
+import 'package:tabnews_app/extensions/dark_mode.dart';
 
 class CodeRender extends StatelessWidget {
   final RenderContext renderContext;
@@ -12,54 +8,42 @@ class CodeRender extends StatelessWidget {
 
   const CodeRender(this.renderContext, this.buildChild, {super.key});
 
-  void copyToClipboard(BuildContext context, String content) {
-    Clipboard.setData(ClipboardData(text: content));
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Código copiado para a área de transferência.'),
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[context.isDarkMode ? 700 : 300],
+        borderRadius: const BorderRadius.all(
+          Radius.circular(4),
+        ),
       ),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: _Content(renderContext, buildChild),
     );
   }
+}
+
+class _Content extends StatelessWidget {
+  final RenderContext renderContext;
+  final List<InlineSpan> Function() buildChild;
+
+  const _Content(this.renderContext, this.buildChild);
 
   @override
   Widget build(BuildContext context) {
     final rawContent = renderContext.tree.children;
-    final rawString = rawContent[0].toString();
-    final content = _sanitize(rawString.substring(1, rawString.length - 1));
-    final result = highlight.parse(content, autoDetection: true);
-
-    return Stack(children: [
-      SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: HighlightView(
-            content.replaceAll('\\n', '\n'),
-            language: result.language ?? 'dart',
-            padding: const EdgeInsets.all(16),
-            theme: atomOneDarkTheme,
-          ),
+    if (rawContent.isEmpty) {
+      return const SizedBox();
+    } else if (rawContent[0].children.isNotEmpty) {
+      return Text.rich(
+        TextSpan(
+          children: buildChild(),
         ),
-      ),
-      Align(
-        alignment: AlignmentDirectional.topEnd,
-        child: IconButton(
-          onPressed: () => copyToClipboard(context, content),
-          icon: const Icon(
-            Icons.copy,
-            color: Colors.white,
-            size: 14,
-          ),
-        ),
-      ),
-    ]);
-  }
-
-  String _sanitize(String rawContent) {
-    var content = rawContent.replaceAll('\\n', '\n');
-    if (content.endsWith('\n')) {
-      content = content.substring(0, content.length - 1);
+      );
+    } else {
+      final rawString = rawContent[0].toString();
+      final content = rawString.substring(1, rawString.length - 1);
+      return Text(content);
     }
-    return content;
   }
 }
