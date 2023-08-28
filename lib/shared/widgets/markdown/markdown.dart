@@ -18,7 +18,8 @@ class Markdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final html = markdown.markdownToHtml(body);
+    var html = markdown.markdownToHtml(body);
+    html = _handleLinks(html);
 
     return Html(
       data: html,
@@ -59,5 +60,19 @@ class Markdown extends StatelessWidget {
         ),
       },
     );
+  }
+
+  String _handleLinks(String content) {
+    final exp = RegExp(r'(?:(https|http):\/\/)[\w/\-?=%.]+\.[\w/\-?=%.]+');
+    Iterable<RegExpMatch> matches = exp.allMatches(content);
+
+    for (var match in matches) {
+      final before = content.substring(match.start - 6, match.start);
+      if (!before.startsWith('href')) {
+        final link = content.substring(match.start, match.end);
+        content = content.replaceAll(link, '<a href="$link">$link</a>');
+      }
+    }
+    return content;
   }
 }
