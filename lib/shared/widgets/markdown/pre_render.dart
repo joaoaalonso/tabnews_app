@@ -4,6 +4,7 @@ import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/html_parser.dart';
+import 'package:highlight/highlight.dart';
 
 class PreRender extends StatelessWidget {
   final RenderContext renderContext;
@@ -23,8 +24,10 @@ class PreRender extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rawContent = renderContext.tree.children;
-    final language = rawContent[0].attributes['class']?.split('-')[1];
     final text = _sanitize(rawContent[0].children[0].toString());
+    var language = rawContent[0].attributes['class']?.split('-')[1];
+
+    language ??= highlight.parse(text, autoDetection: true).language;
 
     return Stack(
       children: [

@@ -45,6 +45,7 @@ dependencies:
   markdown: ^6.0.1
   flutter_html: ^3.0.0-alpha.6
   flutter_highlight: ^0.7.0
+  highlight: ^0.7.0
 
 dev_dependencies:
   flutter_test:
