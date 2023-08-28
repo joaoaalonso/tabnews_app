@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
+import 'package:flutter_highlight/themes/atom-one-light.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/html_parser.dart';
 import 'package:highlight/highlight.dart';
+import 'package:tabnews_app/extensions/dark_mode.dart';
 
 class PreRender extends StatelessWidget {
   final RenderContext renderContext;
@@ -39,7 +41,8 @@ class PreRender extends StatelessWidget {
               text,
               language: language ?? 'js',
               padding: const EdgeInsets.all(16),
-              theme: atomOneDarkTheme,
+              // theme: atomOneDarkTheme,
+              theme: context.isDarkMode ? atomOneDarkTheme : atomOneLightTheme,
             ),
           ),
         ),
