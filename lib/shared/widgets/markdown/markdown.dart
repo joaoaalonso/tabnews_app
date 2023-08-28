@@ -68,7 +68,7 @@ class Markdown extends StatelessWidget {
 
     for (var match in matches) {
       final before = content.substring(match.start - 6, match.start);
-      if (!before.startsWith('href')) {
+      if (!before.contains('href') && !before.contains('src')) {
         final link = content.substring(match.start, match.end);
         content = content.replaceAll(link, '<a href="$link">$link</a>');
       }

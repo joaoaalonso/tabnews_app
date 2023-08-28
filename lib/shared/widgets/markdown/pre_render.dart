@@ -49,7 +49,7 @@ class PreRender extends StatelessWidget {
             onPressed: () => copyToClipboard(context, text),
             icon: const Icon(
               Icons.copy,
-              color: Colors.white,
+              color: Colors.grey,
               size: 14,
             ),
           ),
