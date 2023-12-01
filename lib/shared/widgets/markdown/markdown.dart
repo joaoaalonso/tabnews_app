@@ -16,9 +16,21 @@ class Markdown extends StatelessWidget {
     required this.body,
   });
 
+  String _parseLinks(String body) {
+    final regex =
+        RegExp(r'(?<!\]\()((?:https?|ftp):\/\/[^\s\]\)]*)(?:[\s\]\)](?!\()|$)');
+    final matches = regex.allMatches(body);
+    for (final match in matches) {
+      final url = match[0]!;
+      body = body.replaceAll(url, '[$url]($url)');
+    }
+    return body;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final html = markdown.markdownToHtml(body);
+    final parsedBody = _parseLinks(body);
+    final html = markdown.markdownToHtml(parsedBody);
 
     return Html(
       data: html,
