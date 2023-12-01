@@ -34,6 +34,7 @@ class FavoritesRepository {
       'title': post.title,
       'body': post.body,
       'owner_username': post.ownerUsername,
+      'published_at': post.publishedAt.toString(),
     };
   }
 

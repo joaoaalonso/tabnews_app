@@ -10,7 +10,7 @@ Future<Database> getDb() async {
   return openDatabase(join(await getDatabasesPath(), 'main.db'),
       onCreate: (db, version) async {
     await db.execute(
-      'CREATE TABLE $favoritesTable(id TEXT PRIMARY KEY, slug TEXT, title TEXT, body TEXT, owner_username TEXT)',
+      'CREATE TABLE $favoritesTable(id TEXT PRIMARY KEY, slug TEXT, title TEXT, body TEXT, owner_username TEXT, published_at TEXT)',
     );
     await db.execute(
       'CREATE TABLE $recentSearchTable(id INTEGER PRIMARY KEY AUTOINCREMENT, term TEXT)',
